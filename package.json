@@ -1,0 +1,47 @@
+{
+  "name": "site",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@css-hooks/react": "^1.6.0",
+    "@react-three/drei": "^9.92.7",
+    "@react-three/fiber": "^8.15.12",
+    "@tanstack/react-router": "^1.0.6",
+    "@types/node": "^20.10.6",
+    "@types/three": "^0.160.0",
+    "@uidotdev/usehooks": "^2.4.1",
+    "@unocss/reset": "^0.58.2",
+    "@use-gesture/react": "^10.3.0",
+    "framer-motion": "^10.16.16",
+    "gsap": "^3.12.4",
+    "hono": "^3.11.12",
+    "jotai": "^2.6.1",
+    "motion": "^10.16.4",
+    "pathe": "^1.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "three": "^0.160.0",
+    "unhead": "^1.8.9",
+    "unimport": "^3.7.1",
+    "unocss": "^0.58.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8"
+  }
+}
