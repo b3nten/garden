@@ -15,5 +15,5 @@ const route = new Route({
 export default route;
 
 export function UI() {
-	return <div className="h-200vh"></div>;
+	return <div></div>;
 }

@@ -4,6 +4,7 @@ import { useHead } from "unhead";
 import { css } from "../../modules/css";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
+import { FadeIn } from "../components/FadeIn";
 
 const route = new Route({
 	getParentRoute: () => root,
@@ -24,23 +25,13 @@ const route = new Route({
 export default route;
 
 export function UI() {
-	const ref = useRef<HTMLDivElement>(null);
-	useLayoutEffect(
-		() =>
-			void gsap.fromTo(
-				ref.current,
-				{ opacity: 0 },
-				{ opacity: 1, duration: 0.25, delay: .5, ease: "expo.in"}
-			),
-		[]
-	);
 	return (
-		<div ref={ref} className="pt-256px p-4 grid md:grid-cols-2 gap-12">
+		<FadeIn className="pt-256px p-4 grid md:grid-cols-2 gap-12">
 			<Post />
 			<Post />
 			<Post />
 			<Post />
-		</div>
+		</FadeIn>
 	);
 }
 
