@@ -2,15 +2,19 @@ import { Route } from "@tanstack/react-router";
 import root from "./__root";
 import { useHead } from "unhead";
 import { css } from "../../modules/css";
-import { useLayoutEffect, useRef } from "react";
+import { Suspense, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { FadeIn } from "../components/FadeIn";
 import { darkTheme } from "../styles";
+import { useAtom } from "jotai";
+import { blogPosts } from "../../app";
+import { loadable } from "jotai/utils";
 
 const route = new Route({
 	getParentRoute: () => root,
 	path: "/blog",
 	component: UI,
+	wrapInSuspense: true,
 	loader: () =>
 		Promise.resolve({
 			posts: [
@@ -26,17 +30,17 @@ const route = new Route({
 export default route;
 
 export function UI() {
+	const [posts] = useAtom(blogPosts);
 	return (
 		<FadeIn className="p-4 grid md:grid-cols-2 gap-12">
-			<Post />
-			<Post />
-			<Post />
-			<Post />
+			{posts.map((post) => (
+				<Post key={post} slug={post}  />
+			))}
 		</FadeIn>
 	);
 }
 
-function Post() {
+function Post(props: { slug: string }) {
 	return (
 		<div
 			style={css({
@@ -53,7 +57,7 @@ function Post() {
 				})}
 			>
 				<div className="absolute bottom-4 left-4 text-4xl">
-					Name Of Post Here
+					{props.slug}
 				</div>
 			</div>
 		</div>

@@ -1,4 +1,5 @@
-import { Atom, atom } from "jotai";
+import { atom,  } from "jotai";
+import { Atom, ExtractAtomValue } from "jotai/vanilla";
 
 declare global {
   var godAtoms: Record<string, unknown>;
@@ -12,15 +13,13 @@ export function godAtom<T extends Atom<any>>(
 ) {
   globalThis.godAtoms ??= {};
 
-  let lastAccessed = 0;
-
-  const resultAtom = atom(undefined);
+  const resultAtom = atom<any>(undefined);
 
   const localStorageAtom = atom(() => {
     if (options.key && hasLocalStorage) {
       const item = localStorage.getItem(options.key);
       if (item) {
-        return JSON.parse(item) as T;
+        return JSON.parse(item) as ExtractAtomValue<T>;
       }
     }
     return undefined;
@@ -33,19 +32,12 @@ export function godAtom<T extends Atom<any>>(
 
   const globalStorageAtom = atom(() => {
     if (options.key) {
-      return globalThis.godAtoms[options.key] as T;
+      return globalThis.godAtoms[options.key] as ExtractAtomValue<T>
     }
     return undefined;
   });
 
   const controllerAtom = atom(async (get, { setSelf }) => {
-    // if (get(resultAtom)) {
-    //   if(options.staleTime && Date.now() - lastAccessed > options.staleTime) {
-    //     get(asyncAtom).then((data) => setSelf(data));
-    //     lastAccessed = Date.now();
-    //   }
-    //   return get(resultAtom)
-    // };
     if (get(globalStorageAtom)) {
       get(asyncAtom).then((data) => setSelf(data));
       return get(globalStorageAtom);
@@ -54,6 +46,7 @@ export function godAtom<T extends Atom<any>>(
       get(asyncAtom).then((data) => setSelf(data));
       return get(localStorageAtom);
     }
+    get(asyncAtom).then((data) => setSelf(data));
     return get(asyncAtom);
   }, (get, set, input?: T) => {
     if (input) {
@@ -62,6 +55,7 @@ export function godAtom<T extends Atom<any>>(
       get(asyncAtom).then((data) => set(localStorageAtom, data));
     }
   });
+
   return controllerAtom;
 }
 

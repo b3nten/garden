@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build && vite build --ssr",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
     "@css-hooks/react": "^1.6.0",
+    "@gaiiaa/vono": "^0.0.3",
     "@react-three/drei": "^9.92.7",
     "@react-three/fiber": "^8.15.12",
     "@tanstack/react-router": "^1.0.6",

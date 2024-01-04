@@ -13,3 +13,12 @@ export function Scene(){
     </group>
   )
 }
+
+
+/*
+
+Find each mesh in scene, export it and create a r3f file for each one with lods and preloader.
+
+Export each mesh as a gltf;
+
+*/

@@ -1,19 +1,17 @@
 import { atom, createStore } from "jotai";
+import rpc from "#vono/rpc";
 import { godAtom } from "./godAtom";
-import { loadable } from "jotai/utils";
 
 export const App = createStore();
 
 export const globals = atom({
-  theme: "light",
+	theme: "light",
 });
 
-const createPostAtom = (slug: string) =>
-  godAtom(
-    atom(() => new Promise<string>((r) => setTimeout(() => r(slug), 1000))),
-  );
+const _blogPosts = atom(async () =>
+	rpc.api.blog.$get().then((x) => x.json())
+);
 
-const a = createPostAtom("a")
-
-const val = App.get(a)
-
+export const blogPosts = godAtom(_blogPosts, {
+  key: "blog::posts::list",
+});
