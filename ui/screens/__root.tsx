@@ -1,10 +1,8 @@
 import {
 	Outlet,
 	rootRouteWithContext,
-	useRouter,
 } from "@tanstack/react-router";
 import { css } from "../../modules/css";
-import { useEffect } from "react";
 import { Navigation } from "../components/nav";
 
 const root = rootRouteWithContext<{ head: any }>()({
@@ -21,10 +19,9 @@ function Layout() {
 			})}
 		>
 			<Navigation />
-			<main className="relative -z-10">
+			<main className="relative -z-10 pt-[172px]">
 				<Outlet  />
 			</main>
-			
 		</div>
 	);
 }

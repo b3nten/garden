@@ -7,6 +7,7 @@ import { useScroll } from "@use-gesture/react";
 import { Link } from "@tanstack/react-router";
 import { flushSync } from "react-dom";
 import { useClickAway } from "../../modules/hooks";
+import { darkTheme } from "../styles";
 gsap.registerPlugin(Flip);
 
 const ctx = animationContext();
@@ -44,9 +45,9 @@ export function Navigation() {
 	const nav = useRef<HTMLElement>(null);
 	const menu = useRef<HTMLDivElement>(null);
 	const [showMenu, setShowMenu] = useState(false);
-	const showNav = useRef(true)
+	const showNav = useRef(true);
 
-	useLayoutEffect(() => void ctx.add(enter(nav.current!)), []);;
+	useLayoutEffect(() => void ctx.add(enter(nav.current!)), []);
 
 	useScroll(
 		(event) => {
@@ -75,8 +76,8 @@ export function Navigation() {
 	const linkHandler = useCallback(() => showMenu && toggleMenu(), [showMenu]);
 
 	useClickAway(nav, () => {
-		if(showMenu) toggleMenu()
-	})
+		if (showMenu) toggleMenu();
+	});
 
 	return (
 		<nav
@@ -84,8 +85,9 @@ export function Navigation() {
 			className="w-80vw md:w-60vw min-w-200px backdrop-blur-sm"
 			style={css({
 				padding: "1rem 1rem",
-				backgroundColor: "rgba(100, 120, 100, .5)",
-				border: "1px solid rgba(148, 145, 148, .5)",
+				backgroundColor: darkTheme.palettes.primary[4] + 32,
+				border: "1px solid",
+				borderColor: darkTheme.palettes.primary[5],
 				position: "fixed",
 				left: "50%",
 				top: "3rem",
@@ -103,17 +105,19 @@ export function Navigation() {
 					alignItems: "center",
 				})}
 			>
-				<div style={css({ color: "rgba(175, 200, 175, 1)" })}>BƎNTƎN</div>
+				<div style={css({ color: darkTheme.palettes.primary_vibrant[5] })}>
+					BƎNTƎN
+				</div>
 				<button
 					style={css({
 						fontSize: "1rem",
-						color: "rgba(175, 200, 175, 1)",
+						color: darkTheme.palettes.primary_vibrant[5],
 						padding: "1rem",
 						transition: "all .25s ease-in-out",
 						borderRadius: ".45rem",
 						hover: {
-							backgroundColor: "rgba(175, 200, 175, .125)",
-							color: "rgba(175, 220, 175, 1)",
+							backgroundColor: darkTheme.palettes.primary[4] + 32,
+							color: darkTheme.palettes.primary_vibrant[4],
 						},
 					})}
 					onClick={toggleMenu}
@@ -130,7 +134,7 @@ export function Navigation() {
 					right: "0rem",
 					left: "0rem",
 					fontSize: "1rem",
-					color: "rgba(175, 200, 175, 1)",
+					color: darkTheme.palettes.primary_vibrant[5],
 					sm: {
 						fontSize: "1.5rem",
 					},
@@ -140,42 +144,50 @@ export function Navigation() {
 					<li
 						style={css({
 							hover: {
-								color: "rgba(175, 220, 175, 1)",
+								color: darkTheme.palettes.primary_vibrant[4],
 								transition: "all .25s ease-in-out",
 							},
 						})}
 					>
-						<Link onClick={linkHandler} to="/">home</Link>
+						<Link onClick={linkHandler} to="/">
+							home
+						</Link>
 					</li>
 					<li
 						style={css({
 							hover: {
-								color: "rgba(175, 220, 175, 1)",
+								color: darkTheme.palettes.primary_vibrant[4],
 								transition: "all .25s ease-in-out",
 							},
 						})}
 					>
-						<Link onClick={linkHandler} to="/blog">blog</Link>
+						<Link onClick={linkHandler} to="/blog">
+							blog
+						</Link>
 					</li>
 					<li
 						style={css({
 							hover: {
-								color: "rgba(175, 220, 175, 1)",
+								color: darkTheme.palettes.primary_vibrant[4],
 								transition: "all .25s ease-in-out",
 							},
 						})}
 					>
-						<Link onClick={linkHandler} to="/blog/post">projects</Link>
+						<Link onClick={linkHandler} to="/blog/post">
+							projects
+						</Link>
 					</li>
 					<li
 						style={css({
 							hover: {
-								color: "rgba(175, 220, 175, 1)",
+								color: darkTheme.palettes.primary_vibrant[4],
 								transition: "all .25s ease-in-out",
 							},
 						})}
 					>
-						<Link onClick={linkHandler} to="/blog">contact</Link>
+						<Link onClick={linkHandler} to="/blog">
+							contact
+						</Link>
 					</li>
 				</ul>
 			</div>
