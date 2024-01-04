@@ -105,19 +105,19 @@ export function Navigation() {
 					alignItems: "center",
 				})}
 			>
-				<div style={css({ color: darkTheme.palettes.primary_vibrant[5] })}>
+				<div style={css({ color: darkTheme.palettes.primary_vibrant[3] })}>
 					BƎNTƎN
 				</div>
 				<button
 					style={css({
 						fontSize: "1rem",
-						color: darkTheme.palettes.primary_vibrant[5],
+						color: darkTheme.palettes.primary_vibrant[3],
 						padding: "1rem",
 						transition: "all .25s ease-in-out",
 						borderRadius: ".45rem",
 						hover: {
 							backgroundColor: darkTheme.palettes.primary[4] + 32,
-							color: darkTheme.palettes.primary_vibrant[4],
+							color: darkTheme.palettes.primary_vibrant[5],
 						},
 					})}
 					onClick={toggleMenu}
@@ -134,7 +134,7 @@ export function Navigation() {
 					right: "0rem",
 					left: "0rem",
 					fontSize: "1rem",
-					color: darkTheme.palettes.primary_vibrant[5],
+					color: darkTheme.palettes.primary_vibrant[3],
 					sm: {
 						fontSize: "1.5rem",
 					},
@@ -144,7 +144,7 @@ export function Navigation() {
 					<li
 						style={css({
 							hover: {
-								color: darkTheme.palettes.primary_vibrant[4],
+								color: darkTheme.palettes.primary_vibrant[5],
 								transition: "all .25s ease-in-out",
 							},
 						})}
@@ -156,7 +156,7 @@ export function Navigation() {
 					<li
 						style={css({
 							hover: {
-								color: darkTheme.palettes.primary_vibrant[4],
+								color: darkTheme.palettes.primary_vibrant[5],
 								transition: "all .25s ease-in-out",
 							},
 						})}
@@ -168,7 +168,7 @@ export function Navigation() {
 					<li
 						style={css({
 							hover: {
-								color: darkTheme.palettes.primary_vibrant[4],
+								color: darkTheme.palettes.primary_vibrant[5],
 								transition: "all .25s ease-in-out",
 							},
 						})}
@@ -180,7 +180,7 @@ export function Navigation() {
 					<li
 						style={css({
 							hover: {
-								color: darkTheme.palettes.primary_vibrant[4],
+								color: darkTheme.palettes.primary_vibrant[5],
 								transition: "all .25s ease-in-out",
 							},
 						})}

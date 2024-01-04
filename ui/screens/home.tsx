@@ -37,7 +37,7 @@ function Palettes(){
 export function UI() {
 	return (
 		<div>
-			<Palettes />
+			{/* <Palettes /> */}
 		</div>
 	);
 }
