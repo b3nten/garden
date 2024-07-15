@@ -1,10 +1,10 @@
+import { AutoRouter } from "itty-router";
 import { buildTags } from "#vono/assets";
 import { createApplication } from "./🏠entry";
-import { ServerDataCache } from "./💾datacache";
-import { AutoRouter } from "itty-router"
+import type { ServerDataCache } from "./💾datacache";
 import { BASE_TITLE } from "./🔒constants";
 
-const shell = (args: { data: string, head: string } ) => `
+const shell = (args: { data: string; head: string }) => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,38 +17,35 @@ const shell = (args: { data: string, head: string } ) => `
 	<script id="datacache" type="application/json">${args.data}</script>
 </body>
 </html>
-`
+`;
 
 export default async function server(req: Request): Promise<Response> {
+	const app = createApplication({ env: "server" });
 
-	const app = createApplication({ env: "server" })
-
-	const dataCache = app.dataCache as ServerDataCache
+	const dataCache = app.dataCache as ServerDataCache;
 
 	dataCache.set("globals", {
 		site: {
 			title: "BENTEN.GARDEN",
 			description: "A garden of thoughts and ideas",
-		}
-	})
+		},
+	});
 
-	const router = AutoRouter()
+	const router = AutoRouter();
 
 	router.get("*", async () => {
+		app.Log.info("request", req.url);
 
-		app.Log.info("request", req.url)
+		const head = await buildTags("src/🏠entry.ts");
+		const data = dataCache.searialize();
 
-		const head = await buildTags("src/🏠entry.ts")
-		const data = dataCache.searialize()
+		app.Log.debug("datacache", dataCache.searialize());
+		app.Log.debug("head", head);
 
-		app.Log.debug("datacache", dataCache.searialize())
-		app.Log.debug("head", head)
+		return new Response(shell({ data, head }), {
+			headers: { "content-type": "text/html" },
+		});
+	});
 
-		return new Response(
-			shell({ data, head }), 
-			{ headers: { "content-type": "text/html" } }
-		)
-	})
-
-	return router.fetch(req)
+	return router.fetch(req);
 }
