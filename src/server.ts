@@ -2,6 +2,7 @@ import { buildTags } from "#vono/assets";
 import { createApplication } from "./🏠entry";
 import { ServerDataCache } from "./💾datacache";
 import { AutoRouter } from "itty-router"
+import { BASE_TITLE } from "./🔒constants";
 
 const shell = (args: { data: string, head: string } ) => `
 <!DOCTYPE html>
@@ -10,7 +11,7 @@ const shell = (args: { data: string, head: string } ) => `
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	${args.head}
-	<title>BENTEN.GARDEN</title>
+	<title>${BASE_TITLE}</title>
 </head>
 <body>
 	<script id="datacache" type="application/json">${args.data}</script>
@@ -20,7 +21,7 @@ const shell = (args: { data: string, head: string } ) => `
 
 export default async function server(req: Request): Promise<Response> {
 
-	const app = createApplication("server")
+	const app = createApplication({ env: "server" })
 
 	const dataCache = app.dataCache as ServerDataCache
 

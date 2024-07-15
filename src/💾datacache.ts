@@ -1,4 +1,4 @@
-interface DataCache {
+export interface DataCache {
 	set: (key: string, value: unknown) => void
 	get: (key: string) => unknown
 }

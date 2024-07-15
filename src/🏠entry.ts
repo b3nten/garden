@@ -1,26 +1,32 @@
 import { createLogger, Levels} from "@benstack/logger"
-import { BrowserDataCache, ServerDataCache } from "./💾datacache.ts"
-import { content, metadata } from "../posts/test.md"
+import { BrowserDataCache, DataCache, ServerDataCache } from "./💾datacache.ts"
+import { LOGGER_NAME } from "./🔒constants.ts"
 
+/****************************************************************************************
+ * Styles
+ *****************************************************************************************/
 import "./🎨styles.css"
 
-export function createApplication(env: "server" | "browser"){
+/****************************************************************************************
+ * Application Entry
+ *****************************************************************************************/
+export function createApplication(args: { env: "browser" | "server" }){
 
 	const Log = createLogger({
-		name: "BENTEN.GARDEN",
+		name: LOGGER_NAME,
 		level: import.meta.env.DEV ? Levels.DEBUG : Levels.INFO
 	})
 
-	if(env === "browser"){
+	if(args.env === "browser"){
 		Log.shout("welcome to my garden :)")
 	}
 
-	const dataCache = env === "browser" ? new BrowserDataCache() : new ServerDataCache()
+	const dataCache: DataCache = args.env === "browser" ? new BrowserDataCache() : new ServerDataCache()
 
 	return { dataCache, Log }
 }
 
 if(typeof document !== "undefined"){
-	const app = createApplication("browser")
-	app.Log.debug("datacache", app.dataCache.contents)
+	const app = createApplication({ env: "browser" })
+	app.Log.debug("datacache", app.dataCache)
 }
