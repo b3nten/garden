@@ -5,11 +5,12 @@ import {
 	ServerDataCache,
 } from "./💾datacache.ts";
 import { LOGGER_NAME } from "./🔒constants.ts";
-import "./🎨.css";
+import "./🎨styles.css";
 
 /****************************************************************************************
  * Application Entry
  *****************************************************************************************/
+
 export function createApplication(args: { env: "browser" | "server" }) {
 	const Log = createLogger({
 		name: LOGGER_NAME,
@@ -25,6 +26,10 @@ export function createApplication(args: { env: "browser" | "server" }) {
 
 	return { dataCache, Log };
 }
+
+/****************************************************************************************
+ * Client Bootstrap
+ *****************************************************************************************/
 
 if (typeof document !== "undefined") {
 	const app = createApplication({ env: "browser" });

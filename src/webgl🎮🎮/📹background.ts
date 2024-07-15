@@ -9,8 +9,8 @@ import {
 } from "ogl";
 import { primaryColor, timeFactor, webglLoaded } from "../globals.ts";
 import { createDisposable, update } from "../toolkit.ts";
-import frag from "./background.frag?raw";
-import vert from "./background.vert?raw";
+import frag from "./💣background.frag?raw";
+import vert from "./🕸️background.vert?raw";
 import { Flowmap } from "./flow.js";
 
 export function createBackgroundEffect(target = document.body) {

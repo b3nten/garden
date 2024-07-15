@@ -4,6 +4,10 @@ import { createApplication } from "./🏠entry";
 import type { ServerDataCache } from "./💾datacache";
 import { BASE_TITLE } from "./🔒constants";
 
+/****************************************************************************************
+ * Shell
+ *****************************************************************************************/
+
 const shell = (args: { data: string; head: string }) => `
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +22,10 @@ const shell = (args: { data: string; head: string }) => `
 </body>
 </html>
 `;
+
+/****************************************************************************************
+ * Server entry
+ *****************************************************************************************/
 
 export default async function server(req: Request): Promise<Response> {
 	const app = createApplication({ env: "server" });
