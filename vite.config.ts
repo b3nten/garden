@@ -27,5 +27,8 @@ export default defineConfig({
 			adaptor: new CloudflareAdaptor(),
 			exclude: [/\.md$/]
 		})
-	]
+	],
+	build: {
+		sourcemap: true
+	}
 });
