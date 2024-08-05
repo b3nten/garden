@@ -16,7 +16,7 @@ export function createApplication(args: { env: "browser" | "server" }) {
 		name: LOGGER_NAME,
 		level: import.meta.env.DEV ? Levels.DEBUG : Levels.INFO,
 	});
-
+ 
 	if (args.env === "browser") {
 		Log.shout("welcome to my garden :)");
 	}
@@ -34,4 +34,7 @@ export function createApplication(args: { env: "browser" | "server" }) {
 if (typeof document !== "undefined") {
 	const app = createApplication({ env: "browser" });
 	app.Log.debug("datacache", app.dataCache);
+	import("./ui📐📐/🌏navigation.ts").then((mod) => {
+		new mod.Navigation().append(document.body);
+	})
 }

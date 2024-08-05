@@ -39,11 +39,26 @@ export default async function server(req: Request): Promise<Response> {
 		},
 	});
 
-	const router = AutoRouter();
+	const router = AutoRouter({
+		catch: (err, ireq) => {
+			app.Log.error("error", err);
+		},
+		missing: (ireq) => {
+			app.Log.warn("missing", ireq.url);
+		}
+	});
 
-	router.get("*", async () => {
-		app.Log.info("request", req.url);
+	app.Log.info("request", req.url);
 
+	router.get("/posts.aspx", async (ireq) => {
+
+	})
+
+	router.get("/posts/:post", async (ireq) => {
+		
+	})
+	
+	router.get("*", async (ireq) => {
 		const head = await buildTags("src/🏠entry.ts");
 		const data = dataCache.searialize();
 
