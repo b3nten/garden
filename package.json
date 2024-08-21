@@ -1,0 +1,15 @@
+{
+  "type": "module",
+  "scripts": {
+    "dev": "node 🛠️build --dev",
+    "build": "node 🛠️build",
+    "start": "node .build/server.js"
+  },
+  "dependencies": {
+    "@tinyhttp/app": "^2.3.1",
+    "elysiatech": "^0.0.7",
+    "esbuild": "^0.23.1",
+    "lit": "^3.2.0",
+    "sirv": "^2.0.4"
+  }
+}
