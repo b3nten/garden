@@ -10,6 +10,11 @@
     "elysiatech": "^0.0.7",
     "esbuild": "^0.23.1",
     "lit": "^3.2.0",
-    "sirv": "^2.0.4"
+    "regexparam": "^3.0.0",
+    "sirv": "^2.0.4",
+    "url-pattern": "^1.0.3"
+  },
+  "devDependencies": {
+    "esbuild-plugin-import-pattern": "^0.1.0"
   }
 }

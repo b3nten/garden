@@ -1,23 +1,16 @@
 import "./🌍globals.js"
 import "./🎨styles.css";
-import {defineComponent, ElysiaComponent, html} from "./🎛️ui.js";
+import { entries as components } from './📱components/*.js'
+import { defineComponent } from "./🎛️ui.js";
 
-LOGGER.log("Welcome to my garden :)");
+LOGGER.debug("Components:", components)
 
-class AppEntry extends ElysiaComponent {
-
-	static Tag = "app-entry";
-
-	onMount(){
-		this.data = JSON.parse(this.childNodes[0].textContent)
-		LOGGER.debug("Data:", this.data)
-	}
-
-	render(){
-		return html`
-			<h1>Hello, ${this.data.name}</h1>
-		`
+for(const entry of components){
+	const exports = Object.values(entry?.[1] ?? {})
+	for(const e of exports){
+		const err = run(() => e.Tag && void defineComponent(e))
+		err && LOGGER.error(err)
 	}
 }
 
-defineComponent(AppEntry);
+LOGGER.log("Welcome to my garden :)");

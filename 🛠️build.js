@@ -4,6 +4,7 @@ import * as esbuild from "esbuild"
 import * as fs from "node:fs/promises"
 import { watch } from "fs"
 import { fork } from "node:child_process"
+import { importPatternPlugin } from "esbuild-plugin-import-pattern"
 
 const LOG = createLogger("cli", {
 	level: LogLevel.Success,
@@ -18,6 +19,7 @@ class Thread {
 		if(this.process){
 			try {
 				this.process.kill()
+
 				this.process.disconnect()
 			} catch {}
 		}
@@ -41,13 +43,14 @@ const clientConfig = {
 	bundle: true,
 	target: "ES2022",
 	format: "esm",
-	minify: true,
+	minify: !isDev,
 	conditions: ["worker", "browser"],
 	treeShaking: true,
 	entryNames: "[name]-[hash]",
 	metafile: true,
 	splitting: true,
 	sourcemap: "linked",
+	plugins: [importPatternPlugin()]
 }
 
 /**
